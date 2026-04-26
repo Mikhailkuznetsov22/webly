@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webly | Website Design & Development</title>
+    <meta name="description" content="Webly creates custom websites for businesses. Professional web design and development services.">
+
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --accent: #06b6d4;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --radius: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: #fff;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        /* Navigation */
+        nav {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 24px 80px;
+            background: linear-gradient(135deg, #f0f4ff 0%, #fef0ff 50%, #f0fdff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            right: -5%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3.2rem;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            font-weight: 800;
+            color: var(--dark);
+        }
+
+        .hero-text h1 span {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.5);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--dark);
+            border: 2px solid #e2e8f0;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .hero-image {
+            width: 100%;
+            border-radius: var(--radius);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Services */
+        .services {
+            padding: 100px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            font-weight: 800;
+            color: var(--dark);
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius);
+            padding: 40px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+            border-color: transparent;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            color: white;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+
+        .service-card p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* Examples Section */
+        .portfolio {
+            background: var(--light);
+            padding: 100px 24px;
+        }
+
+        .portfolio-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .portfolio-item {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(99, 102, 241, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .portfolio-overlay span {
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 12px 24px;
+            border: 2px solid white;
+            border-radius: 50px;
+        }
+
+        .portfolio-content {
+            padding: 30px;
+        }
+
+        .portfolio-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .portfolio-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+
+        .portfolio-content p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* Preview Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-container {
+            background: white;
+            border-radius: var(--radius);
+            width: 100%;
+            max-width: 1100px;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+            border-bottom: 1px solid #e2e8f0;
+            background: var(--dark);
+            color: white;
+        }
+
+        .modal-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .modal-close:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .modal-frame {
+            flex: 1;
+            border: none;
+            width: 100%;
+        }
+
+        .modal-bar {
+            display: flex;
+            gap: 8px;
+            padding: 12px 24px;
+            background: #f1f5f9;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .modal-bar span {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .modal-bar .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .dot-red { background: #ef4444; }
+        .dot-yellow { background: #f59e0b; }
+        .dot-green { background: #10b981; }
+
+        /* Process */
+        .process {
+            padding: 100px 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0 auto 24px;
+        }
+
+        .step h3 {
+            margin-bottom: 12px;
+            color: var(--dark);
+            font-size: 1.2rem;
+        }
+
+        .step p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
+            padding: 100px 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .quote-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-info h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .quote-info > p {
+            color: #94a3b8;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .quote-benefits {
+            list-style: none;
+        }
+
+        .quote-benefits li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: #e2e8f0;
+            font-size: 1.05rem;
+        }
+
+        .quote-benefits li::before {
+            content: '✓';
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .quote-form-wrapper {
+            background: white;
+            padding: 48px;
+            border-radius: var(--radius);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+
+        .quote-form-wrapper h3 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+
+        .quote-form-wrapper > p {
+            color: var(--gray);
+            margin-bottom: 32px;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: var(--radius);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: #f8fafc;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-status {
+            margin-top: 16px;
+            padding: 12px;
+            border-radius: var(--radius);
+            text-align: center;
+            font-weight: 600;
+            display: none;
+        }
+
+        .form-status.success {
+            background: #d1fae5;
+            color: #065f46;
+            display: block;
+        }
+
+        .form-status.error {
+            background: #fee2e2;
+            color: #991b1b;
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 24px 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand img {
+            height: 40px;
+            margin-bottom: 20px;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-brand p {
+            color: #94a3b8;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .social-link:hover {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h4 {
+            margin-bottom: 24px;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-light);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            border-top: 1px solid #334155;
+            padding-top: 30px;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Floating CTA */
+        .floating-cta {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 16px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.5);
+            z-index: 999;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .floating-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-cta-group {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+
+            .quote-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .floating-cta {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+
+            .modal-container {
+                height: 95vh;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="/mnt/agents/upload/Logo%20moderne%20de%20Webly.png" alt="Webly">
+            </a>
+            <div class="nav-links">
+                <a href="#services">Services</a>
+                <a href="#examples">Examples</a>
+                <a href="#process">Process</a>
+                <a href="#quote">Contact</a>
+                <a href="#quote" class="nav-cta">Get a Quote</a>
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Websites That Work <span>For Your Business</span></h1>
+                <p class="hero-subtitle">Custom website design and development tailored to your needs. Clean code, modern design, and a focus on what matters — helping your business grow online.</p>
+                <div class="hero-cta-group">
+                    <a href="#quote" class="btn btn-primary">Get Free Quote →</a>
+                    <a href="#examples" class="btn btn-secondary">See Examples</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=600&fit=crop" alt="Website design workspace" class="hero-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2>What We Do</h2>
+            <p>From simple landing pages to complex web applications, we handle the technical side so you can focus on your business.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🎨</div>
+                <h3>Custom Design</h3>
+                <p>Websites built to match your brand. No templates — every design is created specifically for your business and audience.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💻</div>
+                <h3>Clean Development</h3>
+                <p>Fast, secure code using modern technologies. Your site will load quickly and work smoothly on every device.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🛒</div>
+                <h3>E-Commerce</h3>
+                <p>Online stores with secure payments, inventory management, and a checkout process designed to convert visitors.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📱</div>
+                <h3>Mobile-First</h3>
+                <p>Every site we build looks and works great on phones, tablets, and desktops. Mobile traffic is too important to ignore.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔍</div>
+                <h3>SEO Ready</h3>
+                <p>Clean structure and optimized code that helps search engines understand your site. Better visibility from day one.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🚀</div>
+                <h3>Ongoing Support</h3>
+                <p>Need updates or changes after launch? We offer maintenance packages to keep your site running and up-to-date.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Examples Section -->
+    <section class="portfolio" id="examples">
+        <div class="portfolio-container">
+            <div class="section-header">
+                <h2>Example Projects</h2>
+                <p>Click any example below to see a live preview of what we can build for you.</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item" onclick="openPreview('retail')">
+                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=400&fit=crop" alt="Retail store website" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <span>Click to Preview →</span>
+                    </div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-tag">Online Store</span>
+                        <h3>Retail E-Commerce</h3>
+                        <p>Product catalog with filtering, shopping cart, and secure checkout.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" onclick="openPreview('business')">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop" alt="Business website" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <span>Click to Preview →</span>
+                    </div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-tag">Business Site</span>
+                        <h3>Professional Services</h3>
+                        <p>Clean design with service pages, contact forms, and blog section.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" onclick="openPreview('restaurant')">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&h=400&fit=crop" alt="Restaurant website" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <span>Click to Preview →</span>
+                    </div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-tag">Restaurant</span>
+                        <h3>Restaurant & Menu</h3>
+                        <p>Online menu, reservation system, and photo gallery.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" onclick="openPreview('portfolio')">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop" alt="Portfolio website" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <span>Click to Preview →</span>
+                    </div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-tag">Portfolio</span>
+                        <h3>Personal Portfolio</h3>
+                        <p>Showcase work with project galleries and contact form.</p>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Preview Modal -->
+    <div class="modal-overlay" id="previewModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 id="modalTitle">Website Preview</h3>
+                <button class="modal-close" onclick="closePreview()">✕</button>
+            </div>
+            <iframe class="modal-frame" id="previewFrame" src="about:blank"></iframe>
+            <div class="modal-bar">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+                <span id="modalUrl">Preview Mode</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Process Section -->
+    <section class="process" id="process">
+        <div class="section-header">
+            <h2>How It Works</h2>
+            <p>A straightforward process from first conversation to finished website.</p>
+        </div>
+        <div class="process-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Tell Us What You Need</h3>
+                <p>Fill out the quote form or email us. We will ask about your business, goals, and what you want your site to do.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>We Plan & Design</h3>
+                <p>We will propose a solution, create wireframes, and design mockups for your approval before writing any code.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Build & Test</h3>
+                <p>We develop your site with clean code, test it across devices and browsers, and make sure everything works.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Launch & Hand Over</h3>
+                <p>We deploy your site, show you how to use it, and hand over all files and access. Support available if needed.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="quote-section" id="quote">
+        <div class="quote-container">
+            <div class="quote-info">
+                <h2>Request a Free Quote</h2>
+                <p>Tell us about your project and we will get back to you with a clear estimate and timeline. No pressure, no hidden fees.</p>
+                <ul class="quote-benefits">
+                    <li>Free initial consultation</li>
+                    <li>Clear, upfront pricing</li>
+                    <li>Detailed project scope</li>
+                    <li>You own everything we build</li>
+                </ul>
+            </div>
+            <div class="quote-form-wrapper">
+                <h3>Get Your Quote</h3>
+                <p>Fill this out and we will respond within 1-2 business days.</p>
+                <form id="quoteForm" action="https://formsubmit.co/webly.devdesigns@gmail.com" method="POST">
+                    <input type="hidden" name="_subject" value="New Quote Request from Webly Website">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_captcha" value="false">
+
+                    <div class="form-group">
+                        <label for="name">Your Name *</label>
+                        <input type="text" id="name" name="name" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required placeholder="john@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567">
+                    </div>
+                    <div class="form-group">
+                        <label for="service">What Do You Need? *</label>
+                        <select id="service" name="service" required>
+                            <option value="">Select an option...</option>
+                            <option value="new-website">New Website</option>
+                            <option value="redesign">Website Redesign</option>
+                            <option value="ecommerce">Online Store</option>
+                            <option value="landing-page">Landing Page</option>
+                            <option value="other">Something Else</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="budget">Budget Range (Optional)</label>
+                        <select id="budget" name="budget">
+                            <option value="">Not sure / Prefer to discuss</option>
+                            <option value="under-2k">Under $2,000</option>
+                            <option value="2k-5k">$2,000 - $5,000</option>
+                            <option value="5k-10k">$5,000 - $10,000</option>
+                            <option value="10k+">$10,000+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Tell Us About Your Project *</label>
+                        <textarea id="message" name="message" required placeholder="What kind of website do you need? Any specific features? What is your business about?"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" id="submitBtn">Send Request →</button>
+                    <div class="form-status" id="formStatus"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="/mnt/agents/upload/webly_black_white_logo.png" alt="Webly">
+                <p>Webly builds custom websites for businesses of all sizes. Clean code, honest pricing, and websites that actually work.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-link" title="Twitter">X</a>
+                    <a href="#" class="social-link" title="LinkedIn">in</a>
+                    <a href="#" class="social-link" title="Instagram">IG</a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#services">Web Design</a></li>
+                    <li><a href="#services">Development</a></li>
+                    <li><a href="#services">E-Commerce</a></li>
+                    <li><a href="#services">Maintenance</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:webly.devdesigns@gmail.com">webly.devdesigns@gmail.com</a></li>
+                    <li><a href="#quote">Request a Quote</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Webly. Built with care.</p>
+        </div>
+    </footer>
+
+    <!-- Floating CTA -->
+    <a href="#quote" class="floating-cta">Get Quote →</a>
+
+    <script>
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            const nav = document.querySelector('.nav-links');
+            if (nav.style.display === 'flex') {
+                nav.style.display = 'none';
+            } else {
+                nav.style.display = 'flex';
+                nav.style.position = 'absolute';
+                nav.style.top = '100%';
+                nav.style.left = '0';
+                nav.style.right = '0';
+                nav.style.background = 'white';
+                nav.style.flexDirection = 'column';
+                nav.style.padding = '20px';
+                nav.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+            }
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
+            } else {
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Preview Modal Functions
+        const previews = {
+            retail: {
+                title: 'Retail E-Commerce Example',
+                html: `<!DOCTYPE html>
+<html><head><style>
+body{font-family:system-ui,sans-serif;margin:0;background:#f8f9fa}
+.header{background:#2d3436;color:white;padding:20px 40px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:1.5rem;font-weight:800}
+.nav a{color:white;text-decoration:none;margin-left:30px;opacity:0.9}
+.nav a:hover{opacity:1}
+.hero{background:linear-gradient(135deg,#6366f1,#ec4899);color:white;padding:80px 40px;text-align:center}
+.hero h1{font-size:2.5rem;margin-bottom:16px}
+.hero p{font-size:1.2rem;opacity:0.9;margin-bottom:30px}
+.btn{background:white;color:#6366f1;padding:14px 32px;border-radius:50px;text-decoration:none;font-weight:700;display:inline-block}
+.products{padding:60px 40px;max-width:1200px;margin:0 auto}
+.products h2{text-align:center;margin-bottom:40px;font-size:2rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px}
+.card{background:white;border-radius:12px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.1);transition:transform 0.3s}
+.card:hover{transform:translateY(-5px)}
+.card img{width:100%;height:200px;object-fit:cover;background:#e2e8f0}
+.card-content{padding:20px}
+.card h3{margin:0 0 8px;font-size:1.1rem}
+.price{color:#6366f1;font-size:1.3rem;font-weight:800;margin:12px 0}
+.add-btn{background:#6366f1;color:white;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-weight:600;width:100%}
+.add-btn:hover{background:#4f46e5}
+.footer{background:#2d3436;color:white;text-align:center;padding:40px;margin-top:60px}
+</style></head><body>
+<div class="header"><div class="logo">ShopDemo</div><div class="nav"><a href="#">Home</a><a href="#">Products</a><a href="#">Cart (0)</a></div></div>
+<div class="hero"><h1>Summer Collection 2026</h1><p>Discover our latest arrivals with free shipping on orders over $50</p><a href="#" class="btn">Shop Now</a></div>
+<div class="products"><h2>Featured Products</h2><div class="grid">
+<div class="card"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=300&fit=crop" alt="Product"><div class="card-content"><h3>Classic T-Shirt</h3><p>Comfortable cotton tee in multiple colors</p><div class="price">$29.99</div><button class="add-btn">Add to Cart</button></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=300&fit=crop" alt="Product"><div class="card-content"><h3>Running Shoes</h3><p>Lightweight performance sneakers</p><div class="price">$89.99</div><button class="add-btn">Add to Cart</button></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&h=300&fit=crop" alt="Product"><div class="card-content"><h3>Leather Bag</h3><p>Handcrafted genuine leather</p><div class="price">$149.99</div><button class="add-btn">Add to Cart</button></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop" alt="Product"><div class="card-content"><h3>Wireless Headphones</h3><p>Premium sound quality, noise canceling</p><div class="price">$199.99</div><button class="add-btn">Add to Cart</button></div></div>
+</div></div>
+<div class="footer"><p>Example E-Commerce Site by Webly</p></div>
+</body></html>`
+            },
+            business: {
+                title: 'Business Services Example',
+                html: `<!DOCTYPE html>
+<html><head><style>
+body{font-family:system-ui,sans-serif;margin:0;background:#fff;color:#1e293b}
+.header{padding:20px 40px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e2e8f0}
+.logo{font-size:1.5rem;font-weight:800;color:#0f172a}
+.nav a{color:#64748b;text-decoration:none;margin-left:30px;font-weight:500}
+.nav a:hover{color:#6366f1}
+.hero{padding:100px 40px;max-width:1000px;margin:0 auto;text-align:center}
+.hero h1{font-size:3rem;margin-bottom:20px;color:#0f172a}
+.hero p{font-size:1.2rem;color:#64748b;margin-bottom:40px;max-width:600px;margin-left:auto;margin-right:auto}
+.btn{background:#6366f1;color:white;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;margin:5px}
+.btn-outline{border:2px solid #6366f1;color:#6366f1;background:transparent}
+.services{background:#f8fafc;padding:80px 40px}
+.container{max-width:1000px;margin:0 auto}
+.services h2{text-align:center;margin-bottom:50px;font-size:2rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px}
+.service{background:white;padding:35px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
+.service-icon{font-size:2rem;margin-bottom:15px}
+.service h3{margin:0 0 10px;font-size:1.2rem}
+.service p{color:#64748b;line-height:1.6}
+.cta{background:#0f172a;color:white;padding:80px 40px;text-align:center}
+.cta h2{font-size:2rem;margin-bottom:20px}
+.cta p{color:#94a3b8;margin-bottom:30px}
+.footer{text-align:center;padding:40px;color:#64748b;border-top:1px solid #e2e8f0}
+</style></head><body>
+<div class="header"><div class="logo">BrightConsult</div><div class="nav"><a href="#">Services</a><a href="#">About</a><a href="#">Contact</a></div></div>
+<div class="hero"><h1>Helping Businesses Grow</h1><p>Strategic consulting and digital solutions for modern companies. We turn challenges into opportunities.</p><a href="#" class="btn">Our Services</a><a href="#" class="btn btn-outline">Contact Us</a></div>
+<div class="services"><div class="container"><h2>What We Offer</h2><div class="grid">
+<div class="service"><div class="service-icon">📊</div><h3>Data Analytics</h3><p>Transform raw data into actionable insights that drive smarter business decisions.</p></div>
+<div class="service"><div class="service-icon">🎯</div><h3>Strategy Planning</h3><p>Comprehensive roadmaps tailored to your industry, goals, and market position.</p></div>
+<div class="service"><div class="service-icon">💡</div><h3>Digital Transformation</h3><p>Modernize operations with technology solutions that scale with your growth.</p></div>
+</div></div></div>
+<div class="cta"><h2>Ready to Get Started?</h2><p>Schedule a free consultation and discover how we can help your business thrive.</p><a href="#" class="btn">Book a Call</a></div>
+<div class="footer"><p>Example Business Site by Webly</p></div>
+</body></html>`
+            },
+            restaurant: {
+                title: 'Restaurant Website Example',
+                html: `<!DOCTYPE html>
+<html><head><style>
+body{font-family:system-ui,sans-serif;margin:0;background:#1a1a1a;color:#fff}
+.hero{background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&h=600&fit=crop');background-size:cover;background-position:center;height:500px;display:flex;align-items:center;justify-content:center;text-align:center}
+.hero-content h1{font-size:3.5rem;margin-bottom:16px;text-shadow:2px 2px 4px rgba(0,0,0,0.5)}
+.hero-content p{font-size:1.3rem;margin-bottom:30px;opacity:0.9}
+.btn{background:#e74c3c;color:white;padding:14px 30px;border-radius:50px;text-decoration:none;font-weight:700;font-size:1.1rem}
+.info{padding:60px 40px;max-width:800px;margin:0 auto;text-align:center}
+.info h2{font-size:2rem;margin-bottom:20px;color:#f39c12}
+.info p{color:#ccc;line-height:1.8;font-size:1.1rem}
+.menu-section{background:#252525;padding:60px 40px}
+.menu-section h2{text-align:center;margin-bottom:40px;font-size:2rem;color:#f39c12}
+.menu-grid{max-width:800px;margin:0 auto;display:grid;gap:25px}
+.menu-item{display:flex;justify-content:space-between;align-items:center;padding:20px;border-bottom:1px dashed #444}
+.menu-item h3{margin:0;font-size:1.2rem}
+.menu-item p{color:#999;margin:5px 0 0;font-size:0.9rem}
+.price{color:#f39c12;font-size:1.3rem;font-weight:700}
+.gallery{padding:60px 40px;text-align:center}
+.gallery h2{margin-bottom:30px;font-size:2rem;color:#f39c12}
+.images{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;max-width:800px;margin:0 auto}
+.images img{width:100%;height:180px;object-fit:cover;border-radius:8px}
+.footer{text-align:center;padding:40px;color:#666;border-top:1px solid #333}
+</style></head><body>
+<div class="hero"><div class="hero-content"><h1>La Maison</h1><p>Fine dining with locally sourced ingredients</p><a href="#" class="btn">Reserve a Table</a></div></div>
+<div class="info"><h2>About Us</h2><p>La Maison has been serving the community since 2010. Our chefs use only the freshest local ingredients to create memorable dining experiences. Whether you are here for a romantic dinner or a family celebration, we promise exceptional food and warm hospitality.</p></div>
+<div class="menu-section"><h2>Our Menu</h2><div class="menu-grid">
+<div class="menu-item"><div><h3>Grilled Salmon</h3><p>With lemon butter sauce and seasonal vegetables</p></div><div class="price">$28</div></div>
+<div class="menu-item"><div><h3>Beef Tenderloin</h3><p>Grass-fed beef with red wine reduction</p></div><div class="price">$34</div></div>
+<div class="menu-item"><div><h3>Truffle Pasta</h3><p>House-made pasta with black truffle cream</p></div><div class="price">$26</div></div>
+<div class="menu-item"><div><h3>Chocolate Souffle</h3><p>Warm chocolate with vanilla bean ice cream</p></div><div class="price">$14</div></div>
+</div></div>
+<div class="gallery"><h2>Gallery</h2><div class="images">
+<img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=300&fit=crop" alt="Food">
+<img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=400&h=300&fit=crop" alt="Interior">
+<img src="https://images.unsplash.com/photo-1550966871-3ed3c47e2ce2?w=400&h=300&fit=crop" alt="Dish">
+</div></div>
+<div class="footer"><p>Example Restaurant Site by Webly</p></div>
+</body></html>`
+            },
+            portfolio: {
+                title: 'Personal Portfolio Example',
+                html: `<!DOCTYPE html>
+<html><head><style>
+body{font-family:system-ui,sans-serif;margin:0;background:#0f172a;color:#fff}
+.nav{padding:20px 40px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:1.3rem;font-weight:800}
+.nav-links a{color:#94a3b8;text-decoration:none;margin-left:25px;font-weight:500}
+.nav-links a:hover{color:#6366f1}
+.hero{padding:80px 40px;max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.hero-text h1{font-size:3rem;margin-bottom:16px}
+.hero-text h1 span{color:#6366f1}
+.hero-text p{color:#94a3b8;font-size:1.1rem;line-height:1.7;margin-bottom:25px}
+.social a{display:inline-block;width:40px;height:40px;background:#1e293b;border-radius:50%;text-align:center;line-height:40px;margin-right:10px;text-decoration:none;font-size:1.2rem}
+.hero-img{width:100%;border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,0.3)}
+.work{padding:80px 40px;background:#1e293b}
+.work h2{text-align:center;margin-bottom:50px;font-size:2rem}
+.projects{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}
+.project{background:#0f172a;border-radius:12px;overflow:hidden;transition:transform 0.3s}
+.project:hover{transform:translateY(-5px)}
+.project img{width:100%;height:200px;object-fit:cover}
+.project-info{padding:20px}
+.project-info h3{margin:0 0 8px}
+.project-info p{color:#94a3b8;margin:0;font-size:0.9rem}
+.contact{padding:80px 40px;text-align:center;max-width:600px;margin:0 auto}
+.contact h2{font-size:2rem;margin-bottom:20px}
+.contact p{color:#94a3b8;margin-bottom:30px}
+.email-btn{background:#6366f1;color:white;padding:14px 32px;border-radius:50px;text-decoration:none;font-weight:600;display:inline-block}
+.footer{text-align:center;padding:40px;color:#475569;border-top:1px solid #1e293b}
+</style></head><body>
+<div class="nav"><div class="logo">Alex Chen</div><div class="nav-links"><a href="#">Work</a><a href="#">About</a><a href="#">Contact</a></div></div>
+<div class="hero"><div class="hero-text"><h1>Hi, I am <span>Alex</span></h1><p>I am a photographer and visual designer based in Montreal. I create compelling imagery for brands, events, and personal projects. Let us make something beautiful together.</p><div class="social"><a href="#">📷</a><a href="#">🐦</a><a href="#">💼</a></div></div><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=600&fit=crop" class="hero-img" alt="Portrait"></div>
+<div class="work"><h2>Selected Work</h2><div class="projects">
+<div class="project"><img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=400&h=300&fit=crop" alt="Work"><div class="project-info"><h3>Mountain Series</h3><p>Landscape Photography</p></div></div>
+<div class="project"><img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400&h=300&fit=crop" alt="Work"><div class="project-info"><h3>Brand Campaign</h3><p>Commercial Photography</p></div></div>
+<div class="project"><img src="https://images.unsplash.com/photo-1554048612-387768052bf7?w=400&h=300&fit=crop" alt="Work"><div class="project-info"><h3>Urban Stories</h3><p>Street Photography</p></div></div>
+</div></div>
+<div class="contact"><h2>Let us Work Together</h2><p>Have a project in mind? I would love to hear about it. Drop me a line and let us create something amazing.</p><a href="#" class="email-btn">hello@alexchen.com</a></div>
+<div class="footer"><p>Example Portfolio by Webly</p></div>
+</body></html>`
+            }
+        };
+
+        function openPreview(type) {
+            const modal = document.getElementById('previewModal');
+            const frame = document.getElementById('previewFrame');
+            const title = document.getElementById('modalTitle');
+            const url = document.getElementById('modalUrl');
+
+            const preview = previews[type];
+            if (!preview) return;
+
+            title.textContent = preview.title;
+            url.textContent = 'Example Preview - ' + preview.title;
+
+            // Create blob URL from HTML string
+            const blob = new Blob([preview.html], { type: 'text/html' });
+            const blobUrl = URL.createObjectURL(blob);
+            frame.src = blobUrl;
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePreview() {
+            const modal = document.getElementById('previewModal');
+            const frame = document.getElementById('previewFrame');
+
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+
+            // Clean up blob URL
+            if (frame.src && frame.src.startsWith('blob:')) {
+                URL.revokeObjectURL(frame.src);
+            }
+            frame.src = 'about:blank';
+        }
+
+        // Close modal on overlay click
+        document.getElementById('previewModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePreview();
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePreview();
+            }
+        });
+
+        // Form handling
+        const form = document.getElementById('quoteForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const formStatus = document.getElementById('formStatus');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            try {
+                const formData = new FormData(form);
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    formStatus.className = 'form-status success';
+                    formStatus.textContent = '✓ Message sent! We will get back to you within 1-2 business days.';
+                    form.reset();
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch (error) {
+                formStatus.className = 'form-status error';
+                formStatus.textContent = '✗ Something went wrong. Please email us directly at webly.devdesigns@gmail.com';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Request →';
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
